@@ -1,0 +1,19 @@
+services:
+  registry:
+    image: registry:2
+    container_name: registry
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - registry-data:/var/lib/registry
+
+volumes:
+  registry-data:
+    external: true
+    name: 1957affe3253fc479195b9a7f6bfd3cc0cdc2553b465401a03c8b4b4abf53a58
+    # ^ pre-existing anonymous volume holding the actual registry data, from
+    # before this container was tracked in compose. Referenced by name so
+    # `docker compose up -d` here adopts it instead of creating an empty one.
+    # Safe to rename to something normal (`docker volume create registry-data`,
+    # rsync contents, swap this to `name: registry-data`) next time it's down.

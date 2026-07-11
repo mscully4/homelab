@@ -1,0 +1,7 @@
+services:
+  cloakbrowser:
+    image: cloakhq/cloakbrowser
+    container_name: cloakbrowser
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9222:9222"
