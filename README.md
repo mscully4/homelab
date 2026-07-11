@@ -10,7 +10,6 @@ and are linked rather than duplicated, to avoid two copies drifting apart.
 |---|---|---|
 | Immich (photos) | [`immich-app/docker-compose.yml`](immich-app/docker-compose.yml) | server + postgres + redis. Photo/DB storage lives outside this repo at `/mnt/immich` |
 | Home Assistant | [`home-assistant/docker-compose.yml`](home-assistant/docker-compose.yml) | + mosquitto, ring-mqtt. Only hand-authored YAML under `config/` is tracked — runtime state, db, logs, and deps are gitignored |
-| poly-ball | `~/workplace/poly-ball/docker-compose.yml` ([GitHub](https://github.com/mscully4/poly-ball)) | vpn-sidecar, arb-scanner, copy-trader, grafana, prometheus. `arb-scanner`/`copy-trader` are currently **stopped** (disabled on purpose, not removed) |
 | Docker registry | [`registry/docker-compose.yml`](registry/docker-compose.yml) | new — wasn't tracked before |
 | Cloak browser | [`cloakbrowser/docker-compose.yml`](cloakbrowser/docker-compose.yml) | new — wasn't tracked before. Headless browser bound to localhost:9222 |
 
@@ -48,4 +47,11 @@ expected keys. Never commit `.env` itself.
 - 2026-07-11: removed `duke-bot` systemd service (Telegram bot, source left
   at `~/duke`).
 - 2026-07-11: stopped `arb-scanner` / `copy-trader` (poly-ball) — disabled,
-  not deleted.
+  not deleted (superseded by full removal below same day).
+- 2026-07-11: removed poly-ball entirely (no longer used) — all 5 containers,
+  images, and named volumes (`grafana_data`, `prometheus_data`) deleted.
+  Code remains on [GitHub](https://github.com/mscully4/poly-ball); the
+  gitignored `data/` directory (price history, accounts, state — 2.9GB) was
+  not in source control, so it was archived to `~/archive/poly-ball-data`
+  instead of deleted. `~/docker-vpn-sidecar` ([GitHub](https://github.com/mscully4/docker-vpn-sidecar))
+  is now fully unused too but was left as-is (not asked to remove it).
