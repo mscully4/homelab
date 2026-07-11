@@ -1,0 +1,4 @@
+{
+  "mqtt_url": "mqtt://mosquitto:1883",
+  "debug": "ring*"
+}

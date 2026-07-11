@@ -2,3 +2,11 @@
 .env.local
 *.env
 !*.env.example
+
+# Home Assistant: only track hand-authored config, not runtime state/deps/db/logs
+home-assistant/config/*
+!home-assistant/config/*.yaml
+home-assistant/config/secrets.yaml
+
+# ring-mqtt: ring-state.json holds a live Ring account auth token
+home-assistant/ring-mqtt/ring-state.json

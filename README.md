@@ -8,11 +8,18 @@ and are linked rather than duplicated, to avoid two copies drifting apart.
 
 | Service | Compose file | Notes |
 |---|---|---|
-| Immich (photos) | `~/immich-app/docker-compose.yml` | server + postgres + redis |
-| Home Assistant | `~/home-assistant/docker-compose.yml` | + mosquitto, ring-mqtt |
+| Immich (photos) | [`immich-app/docker-compose.yml`](immich-app/docker-compose.yml) | server + postgres + redis. Photo/DB storage lives outside this repo at `/mnt/immich` |
+| Home Assistant | [`home-assistant/docker-compose.yml`](home-assistant/docker-compose.yml) | + mosquitto, ring-mqtt. Only hand-authored YAML under `config/` is tracked — runtime state, db, logs, and deps are gitignored |
 | poly-ball | `~/workplace/poly-ball/docker-compose.yml` ([GitHub](https://github.com/mscully4/poly-ball)) | vpn-sidecar, arb-scanner, copy-trader, grafana, prometheus. `arb-scanner`/`copy-trader` are currently **stopped** (disabled on purpose, not removed) |
 | Docker registry | [`registry/docker-compose.yml`](registry/docker-compose.yml) | new — wasn't tracked before |
 | Cloak browser | [`cloakbrowser/docker-compose.yml`](cloakbrowser/docker-compose.yml) | new — wasn't tracked before. Headless browser bound to localhost:9222 |
+
+`immich-app/` and `home-assistant/` were moved into this repo from `~/immich-app`
+and `~/home-assistant` on 2026-07-11. Both use relative bind-mount paths
+(`.env`, `./config`, etc.) that resolve based on the compose file's own
+location, so they had to be stopped (`docker compose down`), moved, then
+started again from here (`docker compose up -d`) — a plain `mv` alone would
+leave running containers pointed at the old, now-gone paths.
 
 `~/docker-vpn-sidecar` ([GitHub](https://github.com/mscully4/docker-vpn-sidecar)) is the
 original standalone VPN sidecar repo. Its `vpn` service definition was later
