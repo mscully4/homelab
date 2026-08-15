@@ -12,6 +12,7 @@ and are linked rather than duplicated, to avoid two copies drifting apart.
 | Home Assistant | [`home-assistant/docker-compose.yml`](home-assistant/docker-compose.yml) | + mosquitto, ring-mqtt. Only hand-authored YAML under `config/` is tracked — runtime state, db, logs, and deps are gitignored |
 | Docker registry | [`registry/docker-compose.yml`](registry/docker-compose.yml) | new — wasn't tracked before |
 | Cloak browser | [`cloakbrowser/docker-compose.yml`](cloakbrowser/docker-compose.yml) | new — wasn't tracked before. Headless browser bound to localhost:9222 |
+| Homelable | [`homelable/docker-compose.yml`](homelable/docker-compose.yml) | new — infra visualizer/scanner, [github.com/Pouzor/homelable](https://github.com/Pouzor/homelable). Frontend on :3000; copy `.env.example` to `.env` and set `SCANNER_RANGES`/auth before exposing |
 
 `immich-app/` and `home-assistant/` were moved into this repo from `~/immich-app`
 and `~/home-assistant` on 2026-07-11. Both use relative bind-mount paths

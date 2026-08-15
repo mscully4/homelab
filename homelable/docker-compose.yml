@@ -1,0 +1,32 @@
+services:
+  backend:
+    image: ghcr.io/pouzor/homelable-backend:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      SQLITE_PATH: /app/data/homelab.db
+      CORS_ORIGINS: '["http://localhost:3000"]'
+    volumes:
+      - backend_data:/app/data
+    networks:
+      - homelable
+    cap_add:
+      - NET_RAW
+
+  frontend:
+    image: ghcr.io/pouzor/homelable-frontend:latest
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - homelable
+
+volumes:
+  backend_data:
+
+networks:
+  homelable:
+    driver: bridge
