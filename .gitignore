@@ -14,3 +14,7 @@ home-assistant/ring-mqtt/ring-state.json
 # torrents: gluetun holds VPN state/keys, qbittorrent config is runtime state
 torrents/gluetun/
 torrents/qbittorrent/config/
+
+# calibre-web-automated: config is runtime state (app.db holds users + SMTP creds); ingest is a transient drop folder
+calibre-web-automated/config/
+calibre-web-automated/ingest/

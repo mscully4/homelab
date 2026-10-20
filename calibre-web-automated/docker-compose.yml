@@ -1,0 +1,17 @@
+services:
+  calibre-web-automated:
+    image: crocodilestick/calibre-web-automated:latest
+    container_name: calibre-web-automated
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - NETWORK_SHARE_MODE=false
+    volumes:
+      - ./config:/config
+      # Files dropped here are imported into the library and then DELETED.
+      - ./ingest:/cwa-book-ingest
+      - /home/mjscully/calibre-library:/calibre-library
+    ports:
+      - "8083:8083"
