@@ -10,3 +10,7 @@ home-assistant/config/secrets.yaml
 
 # ring-mqtt: ring-state.json holds a live Ring account auth token
 home-assistant/ring-mqtt/ring-state.json
+
+# torrents: gluetun holds VPN state/keys, qbittorrent config is runtime state
+torrents/gluetun/
+torrents/qbittorrent/config/
