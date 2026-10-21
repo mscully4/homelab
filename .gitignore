@@ -18,3 +18,4 @@ torrents/qbittorrent/config/
 # calibre-web-automated: config is runtime state (app.db holds users + SMTP creds); ingest is a transient drop folder
 calibre-web-automated/config/
 calibre-web-automated/ingest/
+calibre-web-automated/ingest-clean/

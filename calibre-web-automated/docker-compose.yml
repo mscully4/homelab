@@ -8,10 +8,31 @@ services:
       - PGID=1000
       - TZ=America/Chicago
       - NETWORK_SHARE_MODE=false
+      # CWA's ingest watcher reads the cleaned folder, not the drop folder.
+      # Web uploads and manual drops still land in /cwa-book-ingest, where
+      # epub-cleaner picks them up first.
+      - WATCH_FOLDER=/cwa-book-ingest-clean
     volumes:
       - ./config:/config
-      # Files dropped here are imported into the library and then DELETED.
+      # Drop books here (or upload via the web UI). epub-cleaner moves them on.
       - ./ingest:/cwa-book-ingest
+      # Files here are imported into the library and then DELETED.
+      - ./ingest-clean:/cwa-book-ingest-clean
       - /home/mjscully/calibre-library:/calibre-library
     ports:
       - "8083:8083"
+
+  # Strips download-site watermarks (links + marker files) from EPUBs before
+  # import. Gmail blocks Send-to-eReader emails that contain them.
+  epub-cleaner:
+    image: python:3.13-alpine
+    container_name: epub-cleaner
+    restart: unless-stopped
+    user: "1000:1000"
+    environment:
+      - CLEAN_DOMAINS=oceanofpdf.com
+    volumes:
+      - ./epub-cleaner/clean.py:/clean.py:ro
+      - ./ingest:/in
+      - ./ingest-clean:/out
+    command: ["python", "-u", "/clean.py", "--watch", "/in", "/out"]

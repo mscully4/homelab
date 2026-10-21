@@ -13,7 +13,7 @@ and are linked rather than duplicated, to avoid two copies drifting apart.
 | Docker registry | [`registry/docker-compose.yml`](registry/docker-compose.yml) | new — wasn't tracked before |
 | Cloak browser | [`cloakbrowser/docker-compose.yml`](cloakbrowser/docker-compose.yml) | new — wasn't tracked before. Headless browser bound to localhost:9222 |
 | Homelable | [`homelable/docker-compose.yml`](homelable/docker-compose.yml) | new — infra visualizer/scanner, [github.com/Pouzor/homelable](https://github.com/Pouzor/homelable). Frontend on :3000; copy `.env.example` to `.env` and set `SCANNER_RANGES`/auth before exposing |
-| Calibre-Web-Automated (books) | [`calibre-web-automated/docker-compose.yml`](calibre-web-automated/docker-compose.yml) | new — web UI + OPDS on :8083 over the Calibre library at `~/calibre-library` (outside this repo). Drop books into `ingest/` to auto-import (files are deleted after import). `config/` holds users + SMTP creds and is gitignored |
+| Calibre-Web-Automated (books) | [`calibre-web-automated/docker-compose.yml`](calibre-web-automated/docker-compose.yml) | new — web UI + OPDS on :8083 over the Calibre library at `~/calibre-library` (outside this repo). Drop books into `ingest/` (or upload in the web UI); the `epub-cleaner` sidecar strips download-site watermarks that make Gmail block Send-to-eReader, then moves them to `ingest-clean/`, which CWA imports from and empties. `config/` holds users + SMTP creds and is gitignored |
 
 `immich-app/` and `home-assistant/` were moved into this repo from `~/immich-app`
 and `~/home-assistant` on 2026-07-11. Both use relative bind-mount paths
