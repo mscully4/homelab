@@ -9,7 +9,7 @@ and are linked rather than duplicated, to avoid two copies drifting apart.
 | Service | Compose file | Notes |
 |---|---|---|
 | Immich (photos) | [`immich-app/docker-compose.yml`](immich-app/docker-compose.yml) | server + postgres + redis. Photo/DB storage lives outside this repo at `/mnt/immich` |
-| Home Assistant | [`home-assistant/docker-compose.yml`](home-assistant/docker-compose.yml) | + mosquitto, ring-mqtt. Only hand-authored YAML under `config/` is tracked — runtime state, db, logs, and deps are gitignored |
+| Home Assistant | [`home-assistant/docker-compose.yml`](home-assistant/docker-compose.yml) | Only hand-authored YAML under `config/` is tracked — runtime state, db, logs, and deps are gitignored |
 | Docker registry | [`registry/docker-compose.yml`](registry/docker-compose.yml) | new — wasn't tracked before |
 | Cloak browser | [`cloakbrowser/docker-compose.yml`](cloakbrowser/docker-compose.yml) | new — wasn't tracked before. Headless browser bound to localhost:9222 |
 | Homelable | [`homelable/docker-compose.yml`](homelable/docker-compose.yml) | new — infra visualizer/scanner, [github.com/Pouzor/homelable](https://github.com/Pouzor/homelable). Frontend on :3000; copy `.env.example` to `.env` and set `SCANNER_RANGES`/auth before exposing |
